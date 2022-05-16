@@ -11,7 +11,7 @@ var Joi = require("joi")
 const validationMiddleware = (req, res, next)=>{
     const schema = Joi.object().keys({
         name:Joi.string().required(),
-        password:Joi.string().required(),
+        password:Joi.alternatives().try(Joi.string().required(),Joi.number().required()),
         search:Joi.string().optional(),
         category:Joi.string().optional().valid("car","bike"),
         amount:Joi.number().optional().integer().min(1).max(100),
